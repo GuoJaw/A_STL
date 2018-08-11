@@ -1,20 +1,17 @@
 #include<iostream>
 #include<set>
-#include<map>
-#include<stack>
-#include<queue>
-#include<vector>
 #include<functional>
-
-#include<string>
 #include<algorithm>
 using namespace std;
 
 /*
 set容器
-	可以使用迭代器随意的“查找”“删除”头部和尾部元素
-
+	可以使用迭代器随意的“查找”，“删除”头部和尾部元素
 */
+
+bool cmp(int a){
+	return a > 5;
+}
 
 void test01(){
 	set<int> Set;  //从小到大排列
@@ -22,15 +19,19 @@ void test01(){
 	Set.emplace(2);
 	Set.emplace(3);
 	Set.emplace(3); //不插入,已存在3
+	Set.emplace(6);
+
+	auto iter1 = Set.find(3); //查找值等于3的迭代器位置
+	auto iter2 = find_if(Set.begin(), Set.end(), cmp); //第一个大于5的迭代器
 }
 
 void test02(){
-	set<pair<int, int>> Set;//默认-->"升序"
+	//set<pair<int, int>> Set;//默认-->"升序"
 	set<pair<int, int>, greater<pair<int, int>>> Set; //"降序"
 	
 	Set.emplace(1, 1);
 	Set.emplace(2, 2);
-	Set.insert(make_pair(5, 5));
+	Set.insert(make_pair(5, 5)); //insert
 	Set.emplace(3, 3);
 	Set.emplace(3, 3);  //不插入,已存在(3,3)
 
@@ -57,10 +58,9 @@ void test02(){
 	//4.插入修改后的(firstVal, secondVal)
 	Set.emplace(firstVal, secondVal);
 
-	
 }
 
 
 int main(){
-	test02();
+	test01();
 }
