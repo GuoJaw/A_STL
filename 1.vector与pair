@@ -1,0 +1,46 @@
+#include<iostream>
+
+#include<map>
+#include<stack>
+#include<queue>
+#include<vector>
+#include<functional>
+
+#include<string>
+#include<algorithm>
+using namespace std;
+void test01(){
+	vector<pair<int, int>> vec;
+/*【1】插入元素: 只能向数组的尾部删除*/
+	/*1.push_back*/
+	//vec.push_back(1, 1); //编译报错，必须是对组
+	vec.push_back(pair<int,int>(1, 1)); //正确插入
+	vec.push_back(make_pair(20,2)); //正确插入
+	/*2.emplace_back*/
+	vec.emplace_back(20,3); //正确插入***
+/*【2】迭代器<---->反向迭代器*/
+	//2.1
+	auto iter = vec.begin();
+	auto riter = vec.rbegin();  //反向迭代器
+	//2.2
+	auto it = riter.base(); //反向迭代器----->迭代器
+/*【3】insert: 插入*/
+	//3.insert--->正向迭代器 | 反向迭代器  （一样）
+	vec.insert(vec.begin(), make_pair(2, 2)); //向vec.begin()指向的位置，插入(2,2)
+	vec.insert(vec.rbegin().base(), make_pair(2, 2));
+/*【4】erase: 删除*/
+	//4.1 erase---->正向迭代器
+	vec.erase(vec.begin());  //删除第一个元素
+	vec.erase(--vec.end());  //删除最后一个元素
+	//4.2 erase---->正向迭代器
+	vec.erase((++vec.rbegin()).base());  //删除最后一个元素
+	vec.erase((++(--vec.rend())).base()); //删除第一个元素
+/*【5】sort排序*/
+	//sort: 先按照first排序；如果first相等，在按照second排序
+	sort(vec.begin(), vec.end());  //默认排序后，从小到达
+	sort(vec.rbegin(), vec.rend());//默认排序后，从大到小
+}
+
+int main(){
+	test01();
+}
