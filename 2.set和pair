@@ -1,0 +1,66 @@
+#include<iostream>
+#include<set>
+#include<map>
+#include<stack>
+#include<queue>
+#include<vector>
+#include<functional>
+
+#include<string>
+#include<algorithm>
+using namespace std;
+
+/*
+set容器
+	可以使用迭代器随意的“查找”“删除”头部和尾部元素
+
+*/
+
+void test01(){
+	set<int> Set;  //从小到大排列
+	Set.emplace(1);
+	Set.emplace(2);
+	Set.emplace(3);
+	Set.emplace(3); //不插入,已存在3
+}
+
+void test02(){
+	set<pair<int, int>> Set;//默认-->"升序"
+	set<pair<int, int>, greater<pair<int, int>>> Set; //"降序"
+	
+	Set.emplace(1, 1);
+	Set.emplace(2, 2);
+	Set.insert(make_pair(5, 5));
+	Set.emplace(3, 3);
+	Set.emplace(3, 3);  //不插入,已存在(3,3)
+
+	Set.emplace(3, 4);  //插入!
+
+	/*修改Set中某个迭代器指向元素的值: --->
+		注意：不能直接修改
+		应当：
+			先捕获迭代器，保存(first,second)
+			删除迭代器
+			修改first,second
+			将修改后的(first,second)重新插入Set
+	*/
+//举例：
+	//1.取出最后一个元素
+	auto end = --Set.end(); 
+	//2.得到最后一个元素的值(first,end)
+	int firstVal = end->first;
+	int secondVal = end->second;
+	//3.修改
+	firstVal++; secondVal += 100;
+	//4.删除end
+	Set.erase(end);
+	//4.插入修改后的(firstVal, secondVal)
+	Set.emplace(firstVal, secondVal);
+
+	
+}
+
+
+int main(){
+	test02();
+}
