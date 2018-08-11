@@ -1,0 +1,47 @@
+#include<iostream>
+#include<vector>
+#include<set>
+#include<map>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+void test03(){
+	int n, k, m = 0;
+	cin >> n >> k;
+	multimap<int, int> map;
+	for (int i = 1; i <= n; i++){
+		int x;
+		cin >> x;
+		map.emplace(x, i);
+	}
+	vector<pair<int, int>> vec;
+	while (k && map.size() > 1 && map.rbegin()->first - map.begin()->first > 1){
+		//1.获取set中指向最大值和最小值的迭代器
+		auto a = map.begin();
+		auto b = map.rbegin();
+		//2.保存a和b的<key,value>
+		int a_key = a->first;  int a_val = a->second;
+		int b_key = b->first;  int b_val = b->second;
+		//3.修改
+		a_key++; 
+		b_key--;
+		//4.删除a和b
+		map.erase(a);
+		map.erase((++b).base());
+		//5.将修改后的元素插入
+		map.emplace(a_key, a_val);
+		map.emplace(b_key, b_val);
+		
+		vec.emplace_back(b_val, a_val);
+	}
+	cout << map.rbegin()->first-map.begin()->first << " " << vec.size() << endl;
+	for (auto p : vec)
+		cout << p.first << " " << p.second << endl;
+	system("pause");
+}
+
+
+int main(){
+	test03();
+}
