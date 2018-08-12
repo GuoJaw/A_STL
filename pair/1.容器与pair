@@ -1,0 +1,25 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<set>
+#include<map>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+int main(){
+	vector<pair<int, int>> vec;
+	vec.emplace_back(1, 1);
+	
+	list<pair<int, int>> list;
+	list.emplace_back(1, 1);
+	list.emplace_front(0, 0); //向前插入
+	list.emplace_back(2, 2); //向后插入
+
+	set<pair<int, int>> set;
+	set.emplace(1, 1);
+
+	map<pair<int, int>, int> map;
+	map.emplace(pair<int, int>(1, 1), 3);
+
+}
