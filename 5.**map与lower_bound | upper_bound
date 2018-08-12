@@ -15,7 +15,7 @@ int main(){
 	map.emplace(4, 1);
 	//查找
 	auto iter1 = map.find(3);  //查找=3的迭代器
-	auto iter2 = map.upper_bound(3); //查找>3的迭代器
+	auto iter2 = map.upper_bound(3); //查找>3的迭代器 -->map的成员函数
 	//删除
 	map.erase(iter1); 
 }
