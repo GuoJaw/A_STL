@@ -1,18 +1,15 @@
 
-#include <iostream>
-#include <vector>
-#include <sstream>
-using namespace std;
+
 
 #include<iostream>
-#include <sstream>
+#include <sstream> // ---> !!!
 #include<set>
 #include<vector>
 #include<functional>
 #include<algorithm>
 using namespace std;
 
-bool merge(int x1, int y1, int x2, int y2){
+bool merge(int x1, int y1, int x2, int y2){ //判断(x1,y1)(x2,y2)是否相交
 	if (x1 > y2)
 		return false;
 	else if (y1 < x2)
@@ -21,16 +18,15 @@ bool merge(int x1, int y1, int x2, int y2){
 		return true;
 }
 void getMinMax(int x1, int y1, int x2, int y2, int& maxV, int& minV)
-{  //两个集合必然相交
+{  //(x1,y1)(x2,y2)相交---->获取最大值/最小值--->即：合并
 	vector<int> V = { x1, y1, x2, y2 };
 	minV = *min_element(V.begin(), V.end());
 	maxV = *max_element(V.begin(), V.end());
 }
 
-
 int main(){
-	set<pair<int, int>> set;
-	vector<pair<int, int>> vec;
+	set<pair<int, int>> set; 
+	vector<pair<int, int>> vec; //保存了结果
 
 	int m;
 	cin >> m;
@@ -49,21 +45,19 @@ int main(){
 
 	}
 
-	while (set.size() > 1){
-		//寻找相邻的两个数
+	while (set.size() > 1){ 
+		//寻找相邻的两个数：第一个数  第二个数
 		auto beg = set.begin(); //第一个数
 		auto sec = ++(set.begin()); //第二个数
 		bool ret = merge(beg->first, beg->second, sec->first, sec->second); //判断第一个和第二个是否相交
 		int maxV, minV;
-		if (ret == true){ //如果想叫进行合并
-			getMinMax(beg->first, beg->second, sec->first, sec->second, maxV, minV);
-			set.erase(beg); //删除最大值和最小值
-			set.erase(sec);
-			set.emplace(minV, maxV); //插入新的
+		if (ret == true){ //相交
+			getMinMax(beg->first, beg->second, sec->first, sec->second, maxV, minV); //合并
+			set.erase(beg);  set.erase(sec); set.emplace(minV, maxV); //更新set
 		}
-		else{ //不想交，直接将结果放入
-			vec.emplace_back(set.begin()->first, set.begin()->second);
-			set.erase(set.begin());
+		else{ //不相交，直接将第一个数，放入vec中后，从set中挪走
+			vec.emplace_back(set.begin()->first, set.begin()->second); //放入vec中后
+			set.erase(set.begin()); //从set中挪走
 		}
 	}
 	for (int i = 0; i < vec.size(); i++){
