@@ -1,0 +1,34 @@
+#include<iostream>
+#include<vector>
+#include<set>
+using namespace std;
+
+class Node{
+public:
+	int key;
+	int val;
+public:
+	Node(int h, int i) :key(h), val(i){}
+public:
+	//方式1:类内定义operator<
+	bool operator<(const Node& ano) const{
+		if (this->key != ano.key)
+			return this->key < ano.key; //升序
+		else
+			return this->val < ano.val; //升序
+	}
+};
+int main(){
+	multiset<Node> set; //key递增,value递增
+	set.emplace(Node(1, 5));
+	set.emplace(Node(1, 2));
+	set.emplace(Node(1, 3));
+	set.emplace(Node(1, 1));
+	set.emplace(Node(2, 5));
+	set.emplace(Node(2, 2));
+	set.emplace(Node(3, 3));
+	set.emplace(Node(3, 1));
+	//获取最大和最小的迭代器
+	auto big = --set.end(); //最后一个数(最大)
+	auto sml = set.begin(); //第一个数(最小)
+}
