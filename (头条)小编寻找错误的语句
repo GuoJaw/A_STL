@@ -35,27 +35,28 @@ void getMinMax(int x1, int y1, int x2, int y2, int& maxV, int& minV)
 }
 
 int main(){
-	set<pair<int, int>> set; 
+	set<pair<int, int>> set;
 	vector<pair<int, int>> vec; //保存了结果
 
 	int m;
 	cin >> m;
-	for (int i = 0; i <= m; i++)
+	while(m--)   //"80,100;200,220;16,32"  格式化输入数据
 	{
-		string tem;
-		getline(cin, tem);
-		istringstream tem_string(tem);
-		int start, end;
-		char tem_char;
-		while (tem_string >> start, tem_string >> tem_char, tem_string >> end)
-		{
-			set.emplace(start, end);
-			tem_string >> tem_char;
-		}
+		string str;
+		cin >> str;
+		istringstream tem_string(str);
+		int a, b;
+		char ch;
+		while (tem_string >> a){
+			tem_string >> ch;
+			tem_string >> b;
+			tem_string >> ch;
 
+			set.emplace(a, b);
+		}
 	}
 
-	while (set.size() > 1){ 
+	while (set.size() > 1){
 		//寻找相邻的两个数：第一个数  第二个数
 		auto beg = set.begin(); //第一个数
 		auto sec = ++(set.begin()); //第二个数
