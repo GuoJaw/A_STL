@@ -1,0 +1,33 @@
+问题描述：输入一行字符串，格式是80,100;200,220;16,32
+    两个数一组，数与数用逗号间隔
+    组组之间用分号间隔
+要求：
+    将每组数保存到set<pair<int,int>> set;中
+
+#include<iostream>
+#include <sstream> // ---> !!!  istringstream
+#include<set>
+#include<vector>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+int main(){
+	string str = "80,100;200,220;16,32";
+
+	set<pair<int, int>> set;
+
+	istringstream isstr(str);
+	int a,b;
+	char ch;
+
+	//isstr可以按照类型拿数据
+	while (isstr >> a){ //每次isstr>>拿走一个数，isstr就会变短，直到变成空
+		isstr >> ch;
+		isstr >> b;
+		isstr >> ch;
+		set.emplace(a, b);
+	}
+}
+
+
