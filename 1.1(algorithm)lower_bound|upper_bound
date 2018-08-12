@@ -1,6 +1,8 @@
 
+查找速度非常快，是二分查找
 lower_bound: >=
 upper_bound: >
+
 
 void test02(){
 	vector<int> vec = { 1, 3, 5, 7, 9, 11 };
@@ -8,10 +10,10 @@ void test02(){
 	//1.求迭代器
 	auto iter1 = lower_bound(vec.begin(), vec.end(), 3); //指向3
 	//2.求下标
-	int pos1 = lower_bound(vec.begin(), vec.end(), 3) - vec.begin();
+	int pos1 = lower_bound(vec.begin(), vec.end(), 3) - vec.begin(); //下标 = 查找到的迭代器-vec.begin()
 	//upper_bound
 	//1.求迭代器
 	auto iter2 = upper_bound(vec.begin(), vec.end(), 3); //指向5
 	//2.求下标
-	int pos2 = upper_bound(vec.begin(), vec.end(), 3) - vec.begin();
+	int pos2 = upper_bound(vec.begin(), vec.end(), 3) - vec.begin(); //下标 = 查找到的迭代器-vec.begin()
 }
