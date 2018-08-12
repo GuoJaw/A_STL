@@ -1,0 +1,17 @@
+求和
+字符串连接
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <numeric>  // 头文件
+
+using namespace std;
+
+int main(){
+	vector<int> A = { 1, 2, 3 };
+	int sum = accumulate(A.begin(), A.end(), 0); 
+
+	vector<string> AA = {"I" ,"  am" ,"  gjw"};
+	string sumA = accumulate(AA.begin(), AA.end(), string(""));
+}
