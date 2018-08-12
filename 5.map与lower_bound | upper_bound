@@ -1,0 +1,21 @@
+
+
+#include<iostream>
+#include<map>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+int main(){
+	multimap<int, int> map;
+	//插入
+	map.emplace(1, 1);
+	map.emplace(2, 1);
+	map.emplace(3, 1);
+	map.emplace(4, 1);
+	//查找
+	auto iter1 = map.find(3);  //查找=3的迭代器
+	auto iter2 = map.upper_bound(3); //查找>3的迭代器
+	//删除
+	map.erase(iter1); 
+}
