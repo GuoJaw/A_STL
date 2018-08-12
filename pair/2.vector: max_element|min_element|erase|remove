@@ -1,0 +1,26 @@
+
+#include<iostream>
+#include<vector>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+int main(){
+	vector<pair<int, int>> vec; //vec不是自动排序的,因此没有greater函数
+	vec.emplace_back(1, 1);
+	vec.emplace_back(2, 1);
+	vec.emplace_back(2, 4);
+	vec.emplace_back(2, 1);
+	vec.emplace_back(3, 1);
+
+	//1.查找"指向"（最大值|最小值）的迭代器
+	auto big = max_element(vec.begin(), vec.end()); //查找最大值
+	auto sml = min_element(vec.begin(), vec.end()); //查找最小值
+	//2.修改迭代器指向的值
+	*big = pair<int, int>(5, 2); 
+	*sml = pair<int, int>(10, 2);
+
+	//删除元素: pair<int,int>(2, 1)
+	vec.erase(remove(vec.begin(), vec.end(), pair<int, int>(2, 1)), vec.end());
+}
+
