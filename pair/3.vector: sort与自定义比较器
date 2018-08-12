@@ -1,3 +1,9 @@
+
+比较器的选择：
+sort(vec.begin(), vec.end(), cmp);  //自定义的比较器
+sort(vec.begin(), vec.end(),greater<pair<int,int>>());  //functional提供的仿函数：greater<pair<int,int>>()
+
+
 #include<iostream>
 #include<vector>
 #include<functional>
@@ -20,4 +26,5 @@ int main(){
 	vec.emplace_back(3, 1);
 
 	sort(vec.begin(), vec.end(), cmp);  //排序
+	sort(vec.begin(), vec.end(),greater<pair<int,int>>());  //排序
 }
