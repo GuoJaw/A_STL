@@ -10,7 +10,7 @@ public:
 public:
 	Node(int h, int i) :key(h), val(i){}
 public:
-	//方式1:类内定义operator<
+	//方式1:类内定义operator<，参数是const，是const函数
 	bool operator<(const Node& ano) const{
 		if (this->key != ano.key)
 			return this->key < ano.key; //升序
