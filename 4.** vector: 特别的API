@@ -14,6 +14,8 @@
 //[4]max和min函数  algorithm
 
 
+
+
 #include<iostream>
 #include<vector>
 #include<functional>
@@ -30,7 +32,6 @@ void test(){
 
 	for (int i = 0; i < n; i++)
 		cin >> Vec[i];
-
 }
 
 /*[2]最值:时间复杂度O(lgN)   algorithm
@@ -38,17 +39,33 @@ void test(){
 		max_element
 */
 void test01(){
-	//1.数组
+//1.数组
 	int A[] = { 1, 3, 2, 5, 8, 5, 40 };
 	int N = sizeof(A) / sizeof(A[0]); //元素个数
+
+	//修改min_element指向的元素的值
+	auto it = min_element(A, A + N);  
+	*it = 50; //修改成50
+
 	int min = *min_element(A, A + N);  //1
 	int max = *max_element(A, A + N);  //40
-	//2.vector
+	
+//2.vector
 	vector<int> B = { 1, 3, 2, 5, 8, 5, 40 };
+	
+	//查找最大值/最小值的"值"
 	int min2 = *min_element(B.begin(), B.end()); //1
 	int max2 = *max_element(B.begin(), B.end()); //40
 
-	//3.自定义比较器
+	//查找最大值/最小值的"下标"
+	int minpos = min_element(B.begin(), B.end())-B.begin(); 
+	int maxpos = max_element(B.begin(), B.end())-B.begin(); 
+
+	//修改min_element指向的元素的值
+	auto minPtr = min_element(B.begin(), B.end()); //1
+	*minPtr = 100;
+
+//3.自定义比较器
 	int min3 = *max_element(B.begin(), B.end(), greater<int>()); //1
 }
 
@@ -77,5 +94,5 @@ void test03(){
 	int r2 = min(a, b); // 2
 }
 int main(){
-	test03();
+	test01();
 }
